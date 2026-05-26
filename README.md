@@ -33,6 +33,21 @@ work). Tier 1 is the full triple-loop — code-reviewer → devil's-advocate →
 security-expert, in separate sessions — for irreversible or security-sensitive
 changes. Rules: [`workflow/review-tiers.md`](workflow/review-tiers.md).
 
+## Solo vs team
+
+The kit handles both:
+- **Solo project** — you're the operator and the gate; memory + the triple-loop
+  + `bootstrap.sh` are the whole stack.
+- **Team-shared repo** — memory becomes **personal-only** (never committed; add
+  `memory/` to `.gitignore` or place it outside the repo), and the triple-loop
+  becomes **pre-PR self-review** (run it on your own changes before opening a
+  PR — the team's review + CI + approvals are the actual merge gate).
+
+`SETUP.md` reads the team's canonical docs (CONTRIBUTING / CODEOWNERS / CI /
+ADRs) and **conforms** to them, and only asks you about genuine gaps or things
+only you can tell it (preferences, codebase quirks you've learned from prior
+unstructured Claude work — it explicitly harvests those).
+
 ## Self-setup at work
 
 ```bash

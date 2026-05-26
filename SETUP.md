@@ -39,19 +39,25 @@ Investigate the actual environment. Prefer commands over guesses. Capture:
 - **Review agents available** — do `code-reviewer`, `devils-advocate`,
   `security-expert` (or equivalents) exist? Check `.claude/agents/` and installed
   plugins/skills. Note which are missing — Tier 1 needs all three.
-- **Existing conventions** — an existing `CLAUDE.md`, `CONTRIBUTING.md`, lint/
-  format config, commit conventions.
+- **Team docs (canonical — read these first; treat as ground truth)** —
+  `CONTRIBUTING.md`, `CODEOWNERS`, `README`, ADR / architecture docs, `.github/`
+  (PR & issue templates, workflows), CI config (`.github/workflows`,
+  `.gitlab-ci.yml`), deploy/release docs, existing `CLAUDE.md`. The team's
+  process is what *is*, not what you'd like — **conform**.
+- **Local conventions** — lint/format config, commit-message conventions.
 - **Tooling/OS** — shell, OS, key CLIs present.
 
 Keep a scratch list of findings — they become seed memories in Phase 4.
 
 ## Phase 3 — Interview the user about their workflows
 
-The user is an **active source** — they *want* to hand over workflow context, so
-ask. Cover the areas below. Ask in a few **focused batches** (group related
-questions), not one giant wall, and confirm understanding as you go. For anything
-the user doesn't know or care about, record a reasonable default as an explicit
-assumption (Phase 4) — never assume silently.
+The user is an **active source** — but **the team docs from Phase 2 are
+canonical**. For each area below, start by stating what Phase 2 already taught
+you, and ask the user only for **gaps the docs didn't cover** (and for things
+only they can tell you — preferences, harvest from their prior unstructured
+Claude usage, gotchas they've learned that aren't written down). Ask in a few
+focused batches, not one wall; confirm as you go; record explicit assumptions
+for anything still unclear — never assume silently.
 
 **Review & risk**
 - What classes of change are **Tier-1 here** (irreversible / security-incident:
@@ -71,8 +77,13 @@ assumption (Phase 4) — never assume silently.
 - The user's role on this project; working-style preferences (concise vs
   detailed, etc.).
 - Hard constraints / gotchas worth always-loading.
-- What must **never** be written to memory (secrets, client names, anything
-  sensitive).
+- What must **never** be written to memory (secrets, teammates' info, client
+  data, anything sensitive).
+
+**Harvest from prior unstructured Claude usage**
+- Context the user keeps re-pasting to Claude (codebase quirks, tribal
+  knowledge, recurring tasks) — strong seed-memory candidates.
+- Prompts or workflows that have worked well but aren't team-documented.
 
 **Logistics**
 - Where memory should live (project-local `./memory/` default, or shared).
@@ -81,9 +92,15 @@ Capture answers as you go — they become seed memories in Phase 4.
 
 ## Phase 4 — Stand up this environment's version
 
-1. **Scaffold memory.** Ensure `memory/MEMORY.md` exists as a clean index. If the
-   kit's two example facts are still present and this is a real environment,
-   delete them.
+1. **Scaffold memory — and place it correctly for the context.**
+   - **Solo / personal project** → `./memory/` in the project (default).
+   - **Team-shared repo** → memory is **personal-only, never committed.** Add
+     `memory/` to `.gitignore`, or place memory outside the repo entirely
+     (e.g. `~/.claude/<project>-memory/`) and point `CLAUDE.md` at it. Never
+     write teammates' info, client data, or secrets into memory.
+
+   Ensure `memory/MEMORY.md` exists as a clean index. If the kit's two example
+   facts are still present and this is a real environment, delete them.
 2. **Seed memories** from Phases 2–3 (one fact per file, per `CLAUDE.md`):
    - a `project` fact — the project + stack + build/test commands;
    - a `user` fact — the user's role/preferences here (if learned);
@@ -97,8 +114,13 @@ Capture answers as you go — they become seed memories in Phase 4.
    actually available.
 4. **Install the review agents if missing.** If `code-reviewer` /
    `devils-advocate` / `security-expert` aren't available, copy the templates
-   from `agents/` into `.claude/agents/`. **Tier 1 is not real until all three
-   exist.**
+   from `agents/` into the appropriate scope:
+   - **Personal use in a team repo** → `~/.claude/agents/` (user scope —
+     not committed, not shared with teammates). This is the default.
+   - **Shared with the team** → `.claude/agents/` in the repo (project scope —
+     committed, requires team agreement).
+
+   **Tier 1 is not real until all three exist.**
 5. **Record assumptions.** Write `ASSUMPTIONS.md` (or a `project` memory) listing
    every Phase-3 assumption, so they can be confirmed/corrected later.
 

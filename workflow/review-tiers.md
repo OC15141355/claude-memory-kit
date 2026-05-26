@@ -8,6 +8,14 @@ the default is named too.
 > a real change fits neither bucket, add a tier *then* — citing the case that
 > justified it. Don't pre-specify a middle tier "just in case."
 
+## In a team context
+
+You aren't the merge gate — your team is, with CODEOWNERS / required approvals
+/ CI. The triple-loop is **pre-PR self-review**: you run it on your own changes
+*before* opening the PR, so the version humans see is already adversarially
+checked. It catches the irreversible / security-class issues early and ships a
+cleaner PR — it does **not** replace human review or let you self-merge.
+
 ## Tier 0 — single code-reviewer pass
 
 **Default for routine work.** Run a code-reviewer agent once, address findings,

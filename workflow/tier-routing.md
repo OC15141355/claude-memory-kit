@@ -48,12 +48,14 @@ dispatched. Ambiguous → Tier-1 until proven Tier-0.
    cold — no shared context with the generator, no opinion in the prompt. It runs
    its own ground-truth checks and returns a verdict. (The no-shared-context
    partner pass, one scale down.)
-5. **Operator gate.** Verify the verifier's findings against ground truth before
-   acting — a reviewer claim is evidence, not a verdict. Triage, apply fixes,
-   approve.
-6. **Merge** is the second structural gate: you merge the PR / commit the change.
-   Steps "3 returns to you" + 6 are *why* the human gate holds without extra
-   tooling.
+5. **Operator self-gate.** Verify the verifier's findings against ground truth
+   before acting — a reviewer claim is evidence, not a verdict. Triage, apply
+   fixes. In a team context this is *pre-PR*: you're shaping what humans will
+   review next.
+6. **Open the PR — the team is the merge gate, not you.** Human review +
+   CODEOWNERS + CI / required approvals are the structural gate the pre-PR work
+   feeds into. (Solo: you'd merge here. In a team you ship a cleaner PR and let
+   the team gate hold.)
 
 ### Parallel substrate (when work is genuinely parallel)
 

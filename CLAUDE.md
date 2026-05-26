@@ -37,6 +37,11 @@ This kit ships a review methodology alongside memory:
 At session start: read `memory/MEMORY.md`. Pull an individual fact file into
 context only when its one-line `description` looks relevant.
 
+**Team-repo placement.** If this kit is being used inside a shared team repo,
+memory is **personal-only, never committed**. Add `memory/` to `.gitignore`, or
+place memory outside the repo entirely. Never write teammates' info, client
+data, or anything sensitive into memory — same standard as commits.
+
 ## Fact file format
 
 Each memory is ONE file holding ONE fact:
