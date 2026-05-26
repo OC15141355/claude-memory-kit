@@ -45,21 +45,39 @@ Investigate the actual environment. Prefer commands over guesses. Capture:
 
 Keep a scratch list of findings — they become seed memories in Phase 4.
 
-## Phase 3 — Flesh out assumptions (ask a little, assume explicitly)
+## Phase 3 — Interview the user about their workflows
 
-Some things aren't on disk. For the highest-value gaps, ask the user **one small
-batch** of questions (don't interrogate). At minimum resolve:
+The user is an **active source** — they *want* to hand over workflow context, so
+ask. Cover the areas below. Ask in a few **focused batches** (group related
+questions), not one giant wall, and confirm understanding as you go. For anything
+the user doesn't know or care about, record a reasonable default as an explicit
+assumption (Phase 4) — never assume silently.
 
-1. **What counts as Tier-1 *here*?** The irreversible / security-incident classes
-   in this environment (prod deploys, DB migrations, IAM/secret changes, public
-   releases, …). This localizes `tier-routing.md`.
-2. **Where should memory live?** Project-local `./memory/` (default) or a shared
-   location.
-3. **Seed facts** — the user's role on this project, the stack, any hard
-   constraints worth always-loading.
+**Review & risk**
+- What classes of change are **Tier-1 here** (irreversible / security-incident:
+  prod deploys, DB migrations, IAM/secret changes, public releases)?
+- Should the triple-loop run on all Tier-1, or specific paths only?
+- Any change types that can skip review entirely?
 
-For anything you still can't confirm: **make a reasonable assumption and record
-it explicitly** (Phase 4, assumptions log). Never assume silently.
+**Source control & shipping**
+- Branch naming + PR conventions; who approves/merges; required CI gates.
+- How code ships (CI/CD, manual deploy, release process); what's irreversible.
+
+**Testing & quality**
+- The real test / build / lint commands; when tests are required before merge.
+- Formatting / lint rules to always honour.
+
+**Memory seeds**
+- The user's role on this project; working-style preferences (concise vs
+  detailed, etc.).
+- Hard constraints / gotchas worth always-loading.
+- What must **never** be written to memory (secrets, client names, anything
+  sensitive).
+
+**Logistics**
+- Where memory should live (project-local `./memory/` default, or shared).
+
+Capture answers as you go — they become seed memories in Phase 4.
 
 ## Phase 4 — Stand up this environment's version
 

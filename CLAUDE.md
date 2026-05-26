@@ -10,12 +10,13 @@ smarter. Works offline — no external service is load-bearing.
 
 This file is intentionally **portable** — drop it into any project unchanged.
 
-## First run on a new environment
+## First run on a new environment (auto-trigger)
 
-If `memory/MEMORY.md` is empty or absent, this kit hasn't been provisioned here
-yet. Run the self-setup runbook in **[`SETUP.md`](SETUP.md)** — it learns the
-environment, fills gaps explicitly, and stands up an environment-specific
-instance. (Or the user can just say "set yourself up.")
+At the start of a session, check `memory/MEMORY.md`. **If it's empty or absent,
+this kit hasn't been provisioned here yet — proactively tell the user and offer to
+onboard now by running [`SETUP.md`](SETUP.md). Don't wait to be asked.** SETUP.md
+interviews the user about their workflows, learns the environment, and stands up an
+environment-specific instance. Once memory has real entries, skip this.
 
 ## Companion: the review workflow
 
