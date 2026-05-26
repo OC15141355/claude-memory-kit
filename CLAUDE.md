@@ -10,6 +10,23 @@ smarter. Works offline — no external service is load-bearing.
 
 This file is intentionally **portable** — drop it into any project unchanged.
 
+## First run on a new environment
+
+If `memory/MEMORY.md` is empty or absent, this kit hasn't been provisioned here
+yet. Run the self-setup runbook in **[`SETUP.md`](SETUP.md)** — it learns the
+environment, fills gaps explicitly, and stands up an environment-specific
+instance. (Or the user can just say "set yourself up.")
+
+## Companion: the review workflow
+
+This kit ships a review methodology alongside memory:
+- [`workflow/review-tiers.md`](workflow/review-tiers.md) — Tier 0 (single
+  code-reviewer) vs Tier 1 (triple-loop).
+- [`workflow/tier-routing.md`](workflow/tier-routing.md) — which tier a change
+  gets, and how Tier-0 dispatches.
+- `agents/` — ready-to-install `code-reviewer` / `devils-advocate` /
+  `security-expert` subagent definitions for the triple-loop.
+
 ## Where memory lives
 
 - `memory/MEMORY.md` — the **index**, loaded into context at the start of every
